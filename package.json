@@ -1,0 +1,39 @@
+{
+  "name": "game-api",
+  "version": "0.0.1",
+  "description": "An API to serve as back-end for games and gamification projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ospet/game-api.git"
+  },
+  "keywords": [
+    "gamification",
+    "game",
+    "backend",
+    "api"
+  ],
+  "author": "Olivier Spet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ospet/game-api/issues"
+  },
+  "homepage": "https://github.com/ospet/game-api#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.0.5",
+    "mocha-multi": "^1.0.1"
+  },
+  "dependencies": {
+    "hapi": "^17.2.3",
+    "hapi-auth-jwt": "^4.0.0",
+    "hapi-auth-jwt2": "^8.1.0",
+    "joi": "^13.1.2",
+    "jsonwebtoken": "^8.2.0",
+    "mongoose": "^5.0.12"
+  }
+}
