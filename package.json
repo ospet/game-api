@@ -4,7 +4,7 @@
   "description": "An API to serve as back-end for games and gamification projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "apitest": "mocha test/**/*api.spec.js"
   },
   "repository": {
     "type": "git",

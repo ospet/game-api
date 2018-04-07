@@ -1,6 +1,5 @@
 // make a fake logger object
 if (!global.logger) {
-  console.log('defining logger');
   global.logger = {
     trace: (msg) => {console.log(`[TRACE] ${msg}`)},
     debug: (msg) => {console.log(`[DEBUG] ${msg}`)},
@@ -9,5 +8,4 @@ if (!global.logger) {
     error: (msg) => {console.log(`[ERROR] ${msg}`)}
   }
 }
-global.logger.debug('test');
 module.exports = require('./api');

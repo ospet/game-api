@@ -1,8 +1,7 @@
 const Hapi = require('hapi');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/examplegameapi');
-const port = 8090;
+const port = 8095;
 const jwtOptions = {
   algorithm: 'HS256',
   issuer: 'us',
@@ -15,39 +14,37 @@ const generateToken = (payload) => jwt.sign(payload, secret, jwtOptions);
 
 const validateToken = async (decoded, request) => ({isValid: decoded ? true: false});
 
+global.token = generateToken({username: 'testuser'});
+
 const init = async () => {
-  const server = new Hapi.Server({
+  await mongoose.connect('mongodb://localhost/examplegameapi_at');
+  global.server = new Hapi.Server({
     host: 'localhost',
     port
   });
-  await server.register(require('hapi-auth-jwt2'));
+  await global.server.register(require('hapi-auth-jwt2'));
  
-  server.auth.strategy('token', 'jwt', {
+  global.server.auth.strategy('token', 'jwt', {
       key: secret,
       validate: validateToken,
       verifyOptions: jwtOptions
     }
   );
 
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, h) => ({env: process.env.NODE_ENV, token: generateToken({username: 'testuser'})})
-  });
-
-  await server.register(require('./index'), {
+  await global.server.register(require('../../index'), {
     routes: {
       prefix: '/api'
     }
   });
-
-  await server.start();
-  return server;
+  
+  await global.server.start();
 };
 
-init().then(server => {
-  console.log('Server running at:', server.info.uri);
-})
-.catch(error => {
-  console.log(error);
+before(async () => {
+  await init();
 });
+
+after(async () => {
+  await global.server.stop();
+  await mongoose.disconnect();
+})
