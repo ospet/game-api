@@ -4,6 +4,7 @@
   "description": "An API to serve as back-end for games and gamification projects",
   "main": "index.js",
   "scripts": {
+    "test": "npm run -s apitest",
     "apitest": "mocha test/**/*api.spec.js"
   },
   "repository": {
