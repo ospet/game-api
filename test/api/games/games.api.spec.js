@@ -22,8 +22,7 @@ describe('Games API', () => {
   it('Get games', async () => {
     let resp = await chai.request('http://localhost:8095/api/')
     .get('games')
-    .set('Content-Type', 'application/json')
-    .set('authorization', global.token);
+    .set(global.headers);
     expect(resp).to.have.property('body').to.be.an('array').with.lengthOf(3);
   });
 
@@ -31,8 +30,7 @@ describe('Games API', () => {
     let resp = await chai.request('http://localhost:8095/api/')
     .post('games')
     .send({name: 'newgame'})
-    .set('Content-Type', 'application/json')
-    .set('authorization', global.token);
+    .set(global.headers);
     expect(resp).to.have.nested.property('body.name').to.eql('newgame');
   });
 
@@ -40,8 +38,7 @@ describe('Games API', () => {
     let resp = await chai.request('http://localhost:8095/api/')
     .post('games')
     .send({name: 'newgame'})
-    .set('Content-Type', 'application/json')
-    .set('authorization', global.token);
+    .set(global.headers);
     expect(resp).to.have.status(409);
   });
 });

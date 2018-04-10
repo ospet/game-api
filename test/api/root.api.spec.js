@@ -15,6 +15,10 @@ const generateToken = (payload) => jwt.sign(payload, secret, jwtOptions);
 const validateToken = async (decoded, request) => ({isValid: decoded ? true: false});
 
 global.token = generateToken({username: 'testuser'});
+global.headers = {
+  'Content-Type': 'application/json',
+  'authorization': global.token
+};
 
 const init = async () => {
   await mongoose.connect('mongodb://localhost/examplegameapi_at');
